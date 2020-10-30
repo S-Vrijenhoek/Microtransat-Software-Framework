@@ -1,0 +1,40 @@
+@startuml Component Diagram
+
+package "Sailboat" {
+
+    package "Software Framework" {
+
+        component "Raspberry Pi" as raspberry_pi {
+            [CAN bus client] as pi_can_bus_client
+            [AI] as ai
+
+            ai -(0- pi_can_bus_client
+            pi_can_bus_client -(0- canbus
+        }
+
+        component "Arduino" as arduino {
+            [IO] as io
+            [CAN bus client] as arduino_can_bus_client
+
+            arduino_can_bus_client -(0- canbus
+        }
+
+        component "CAN bus" as canbus {
+
+        }
+
+        io --> arduino_can_bus_client
+        arduino_can_bus_client --> io
+
+    }
+
+    component "Modules" as modules {
+
+    }
+
+    modules --> io
+    io --> modules
+
+}
+
+@enduml
