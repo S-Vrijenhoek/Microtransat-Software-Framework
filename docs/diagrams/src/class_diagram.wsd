@@ -3,20 +3,32 @@
 interface IClient
 interface IModule
 interface IModuleFactory
+interface IDecisionTree
 interface ISoftwareFramework
+interface IReadableModule
+interface IWriteableModule
 
 class Client
-class Module
 class ModuleFactory
+class DecisionTree
 class SoftwareFramework
+class Sensor
+class Actuator
+class Battery
 
 IClient <|.. Client
-IModule <|.. Module
+IModule <|-- IReadableModule
+IModule <|-- IWriteableModule
+IReadableModule <|.. Sensor
+IReadableModule <|.. Actuator
+IReadableModule <|.. Battery
+IWriteableModule <|.. Actuator
 IModuleFactory <|.. ModuleFactory
+IDecisionTree <|.. DecisionTree
 ISoftwareFramework <|.. SoftwareFramework
-
 SoftwareFramework - "0..*" IModule
 SoftwareFramework -left- "1" IModuleFactory
+SoftwareFramework -down- "1" IDecisionTree
 
 interface IClient {
     - feedModuleData() : void
@@ -25,10 +37,18 @@ interface IClient {
 
 interface IModule {
     - id : string
-    - data : float
     + getId() : string
-    + getData() : float
-    + updateData() : void
+}
+
+interface IReadableModule {
+    - data
+    + getData()
+}
+
+interface IWriteableModule {
+    - instruction
+    + getInstruction()
+    + setInstruction()
 }
 
 interface ISoftwareFramework {
@@ -39,6 +59,11 @@ interface ISoftwareFramework {
 
 interface IModuleFactory {
     + createModules() : list
+}
+
+interface IDecisionTree {
+    + createInstructions()
+    - processModulesData()
 }
 
 note left of IModuleFactory::createModules
