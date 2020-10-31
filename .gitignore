@@ -130,3 +130,6 @@ dmypy.json
 
 # JetBrains stuff
 .idea/
+
+# Visual Studio Code stuff
+.vscode/
