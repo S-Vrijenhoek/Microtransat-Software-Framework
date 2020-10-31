@@ -1,0 +1,61 @@
+@startuml Class Diagram
+
+interface IClient
+interface IModule
+interface IModuleFactory
+interface ISoftwareFramework
+
+class Client
+class Module
+class ModuleFactory
+class SoftwareFramework
+
+IClient <|.. Client
+IModule <|.. Module
+IModuleFactory <|.. ModuleFactory
+ISoftwareFramework <|.. SoftwareFramework
+
+SoftwareFramework - "0..*" IModule
+SoftwareFramework -left- "1" IModuleFactory
+
+interface IClient {
+    - feedModuleData() : void
+    - sendInstructions() : void
+}
+
+interface IModule {
+    - id : string
+    - data : float
+    + getId() : string
+    + getData() : float
+    + updateData() : void
+}
+
+interface ISoftwareFramework {
+    - setup() : void
+    + getInstructions() : list
+    + updateModuleData(id : string, data : float) : void
+}
+
+interface IModuleFactory {
+    + createModules() : list
+}
+
+note left of IModuleFactory::createModules
+    Modules need to be defined
+    inside a settings file.
+end note
+
+note right of IClient::feedModuleData 
+    Feeds active CAN bus
+    module data to 
+    SoftwareFramework
+end note
+
+note right of IClient::sendInstructions 
+    Sends instructions from
+    SoftwareFramework back
+    to CAN bus. 
+end note
+
+@enduml
