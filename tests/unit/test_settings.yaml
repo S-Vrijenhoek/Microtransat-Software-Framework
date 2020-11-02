@@ -1,0 +1,8 @@
+foobar: "baz"
+modules:
+  - id: "1"
+    type: "foo"
+  - id: "2"
+    type: "bar"
+  - id: "3"
+    type: "baz"
