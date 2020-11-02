@@ -22,7 +22,7 @@ jobs:
           python -m pip install -r requirements.txt
       - name: Lint with flake8
         run: |
-          flake8 --count --show-source --statistics src
+          flake8 --count --show-source --statistics poseidon
           flake8 --count --show-source --statistics tests
       - name: Test with unittest
         run: |

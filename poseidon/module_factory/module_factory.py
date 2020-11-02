@@ -1,6 +1,6 @@
 import ruamel.yaml
-from src.module_factory.module_factory_base import ModuleFactoryBase
-from src.exception.settings_exception import SettingsException
+from poseidon.module_factory.module_factory_base import ModuleFactoryBase
+from poseidon.exception.settings_exception import SettingsException
 
 
 def load_settings_modules(settings_location: str) -> list:

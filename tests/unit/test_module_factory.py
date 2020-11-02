@@ -1,6 +1,6 @@
 import unittest
-from src.module_factory.module_factory import *
-from src.exception.settings_exception import SettingsException
+from poseidon.module_factory.module_factory import load_settings_modules
+from poseidon.exception.settings_exception import SettingsException
 
 
 class TestModuleFactoryMethods(unittest.TestCase):
@@ -12,10 +12,13 @@ class TestModuleFactoryMethods(unittest.TestCase):
             {'id': '3', 'type': 'baz'}
         ]
 
-        self.assertEqual(load_settings_modules('tests/unit/test_settings.yaml'), expected_result)
+        self.assertEqual(load_settings_modules('tests/unit/test_settings.yaml'),
+                         expected_result)
 
     def test_load_settings_modules_throws_exception_on_missing_module(self):
-        self.assertRaises(SettingsException, load_settings_modules, 'tests/unit/test_settings_without_modules.yaml')
+        self.assertRaises(SettingsException,
+                          load_settings_modules,
+                          'tests/unit/test_settings_without_modules.yaml')
 
 
 if __name__ == '__main__':

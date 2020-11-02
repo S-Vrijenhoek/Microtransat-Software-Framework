@@ -1,4 +1,4 @@
-# Microtransat Software Framework
+# Microtransat Poseidon
 
 ## Getting started
 
