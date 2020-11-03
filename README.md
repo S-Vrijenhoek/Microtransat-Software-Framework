@@ -32,7 +32,7 @@ pip install -r requirements.txt
 Make sure to pull the latest changes and to follow the steps specified below before contributing. 
 1. Lint with flake8
 ```bash
-flake8 --count --show-source --statistics src
+flake8 --count --show-source --statistics poseidon
 flake8 --count --show-source --statistics tests
 ``` 
 2. Test with unittest

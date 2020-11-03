@@ -1,6 +1,9 @@
 import ruamel.yaml
 from poseidon.module_factory.module_factory_base import ModuleFactoryBase
+from poseidon.module.sensor import Sensor
+from poseidon.module.actuator import Actuator
 from poseidon.exception.settings_exception import SettingsException
+from poseidon.exception.module_exception import ModuleException
 
 
 def load_settings_modules(settings_location: str) -> list:
@@ -16,19 +19,18 @@ def load_settings_modules(settings_location: str) -> list:
 
 class ModuleFactory(ModuleFactoryBase):
 
-    def create_modules(self) -> list:
+    def create_modules(self, settings_location='poseidon/settings.yaml') -> list:
         created_modules = []
 
-        for module in load_settings_modules('./settings.yaml'):
+        for module in load_settings_modules(settings_location):
+            module_id = module['id']
             module_type = module['type']
 
-            # TODO: class initialization
             if module_type == 'sensor':
-                created_modules.append('s')
+                created_modules.append(Sensor(module_id))
             elif module_type == 'actuator':
-                created_modules.append('s')
+                created_modules.append(Actuator(module_id))
             else:
-                # TODO: error handling
-                print('error')
+                raise ModuleException.for_missing_module(module_type)
 
         return created_modules

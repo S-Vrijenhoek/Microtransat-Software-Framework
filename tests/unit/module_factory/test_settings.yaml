@@ -1,0 +1,6 @@
+foobar: "baz"
+modules:
+  - id: "1"
+    type: "sensor"
+  - id: "2"
+    type: "actuator"
