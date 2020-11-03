@@ -8,10 +8,6 @@ from poseidon.exception.module_exception import ModuleException
 
 class TestModuleFactoryMethods(unittest.TestCase):
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.module_factory = ModuleFactory()
-
     def test_load_settings_modules_correctly_loads_modules(self):
         expected_result = [
             {'id': '1', 'type': 'sensor'},
@@ -32,13 +28,18 @@ class TestModuleFactoryMethods(unittest.TestCase):
             Actuator('2')
         ]
 
-        result = self.module_factory.create_modules('tests/unit/module_factory/test_settings.yaml')
+        result = ModuleFactory.create_modules('tests/unit/module_factory/test_settings.yaml')
         self.assertListEqual(result, expected_result)
 
     def test_create_modules_raises_exception_on_missing_module(self):
         self.assertRaises(ModuleException,
-                          self.module_factory.create_modules,
+                          ModuleFactory.create_modules,
                           'tests/unit/module_factory/test_settings_with_missing_module.yaml')
+
+    def test_create_modules_raises_exception_on_duplicate_module(self):
+        self.assertRaises(ModuleException,
+                          ModuleFactory.create_modules,
+                          'tests/unit/module_factory/test_settings_with_duplicate_module.yaml')
 
 
 if __name__ == '__main__':

@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 
 class ModuleFactoryBase(ABC):
 
+    @staticmethod
     @abstractmethod
-    def create_modules(self, settings_location: str) -> list:
+    def create_modules(settings_location: str) -> list:
         pass

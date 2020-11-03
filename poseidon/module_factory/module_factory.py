@@ -19,12 +19,17 @@ def load_settings_modules(settings_location: str) -> list:
 
 class ModuleFactory(ModuleFactoryBase):
 
-    def create_modules(self, settings_location='poseidon/settings.yaml') -> list:
+    @staticmethod
+    def create_modules(settings_location) -> list:
         created_modules = []
+        used_ids = []
 
         for module in load_settings_modules(settings_location):
             module_id = module['id']
             module_type = module['type']
+
+            if module_id in used_ids:
+                raise ModuleException.for_duplicate_module(module_id)
 
             if module_type == 'sensor':
                 created_modules.append(Sensor(module_id))
@@ -32,5 +37,7 @@ class ModuleFactory(ModuleFactoryBase):
                 created_modules.append(Actuator(module_id))
             else:
                 raise ModuleException.for_missing_module(module_type)
+
+            used_ids.append(module_id)
 
         return created_modules
