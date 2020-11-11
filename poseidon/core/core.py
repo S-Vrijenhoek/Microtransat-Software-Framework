@@ -8,7 +8,7 @@ class Core(CoreBase):
     def __init__(self, settings_location='poseidon/settings.yaml'):
         self._modules = ModuleFactory.create_modules(settings_location)
 
-    def get_instructions(self) -> list:
+    def get_course_instructions(self) -> list:
         pass
 
     def set_module_data(self, arbitration_id: str, data: list) -> None:

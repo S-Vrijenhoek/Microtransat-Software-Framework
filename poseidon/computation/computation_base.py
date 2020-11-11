@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 
 class ComputationBase(ABC):
 
+    # TODO: Implement algorithm
     @abstractmethod
-    def interpret_input_modules(self, modules: list):
+    def compute_course_instructions(self):
         pass

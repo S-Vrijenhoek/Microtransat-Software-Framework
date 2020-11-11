@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class CoreBase(ABC):
 
     @abstractmethod
-    def get_instructions(self) -> list:
+    def get_course_instructions(self) -> list:
         pass
 
     @abstractmethod
