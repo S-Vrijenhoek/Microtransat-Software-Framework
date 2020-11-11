@@ -1,6 +1,9 @@
+import logging
+
+
 class SettingsException(Exception):
     def __init__(self, message):
-        print(message)
+        logging.error(message)
 
     @staticmethod
     def for_missing_modules():

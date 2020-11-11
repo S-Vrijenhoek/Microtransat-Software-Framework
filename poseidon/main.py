@@ -1,2 +1,5 @@
-# TODO: single or double quotes ?????
-# TODO: add logger?
+import logging
+
+logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s',
+                    filename='poseidon/debug.log',
+                    level=logging.DEBUG)

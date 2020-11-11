@@ -1,3 +1,4 @@
+import logging
 import ruamel.yaml
 from poseidon.module_factory.module_factory_base import ModuleFactoryBase
 from poseidon.module.sensor import Sensor
@@ -24,6 +25,7 @@ class ModuleFactory(ModuleFactoryBase):
         created_modules = []
         used_ids = []
 
+        logging.info('Loading all modules ...')
         for module in load_settings_modules(settings_location):
             module_id = module['id']
             module_type = module['type']
@@ -39,5 +41,7 @@ class ModuleFactory(ModuleFactoryBase):
                 raise ModuleException.for_missing_module(module_type)
 
             used_ids.append(module_id)
+            logging.info('Detected %s with an id of "%s"', module_type, module_id)
 
+        logging.info('Finished loading all modules.')
         return created_modules

@@ -1,3 +1,4 @@
+import logging
 from poseidon.core.core_base import CoreBase
 from poseidon.module_factory.module_factory import ModuleFactory
 from poseidon.exception.module_exception import ModuleException
@@ -6,7 +7,9 @@ from poseidon.exception.module_exception import ModuleException
 class Core(CoreBase):
 
     def __init__(self, settings_location='poseidon/settings.yaml'):
+        logging.info('Booting up the system ...')
         self._modules = ModuleFactory.create_modules(settings_location)
+        logging.info('Finished booting up the system.')
 
     def get_course_instructions(self) -> list:
         pass

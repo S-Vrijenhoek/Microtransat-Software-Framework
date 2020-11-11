@@ -1,6 +1,9 @@
+import logging
+
+
 class ModuleException(Exception):
     def __init__(self, message):
-        print(message)
+        logging.error(message)
 
     @staticmethod
     def for_missing_module(module_name: str):
