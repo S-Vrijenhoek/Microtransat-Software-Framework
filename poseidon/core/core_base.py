@@ -8,5 +8,5 @@ class CoreBase(ABC):
         pass
 
     @abstractmethod
-    def set_module_data(self, abstraction_id: str, data: list):
+    def set_module_data(self, arbitration_id: str, data: list):
         pass

@@ -1,86 +1,79 @@
 @startuml Class Diagram
 
-interface IClient
-interface IModule
-interface IModuleFactory
-interface IDecisionTree
-interface ISoftwareFramework
-interface IReadableModule
-interface IWriteableModule
+interface ModuleBase
+interface ModuleFactoryBase
+interface ComputationBase
+interface CoreBase
 
-class Client
+class ReadableModule
+class WriteableModule
+class Module
 class ModuleFactory
-class DecisionTree
-class SoftwareFramework
+class Computation
+class Core
 class Sensor
 class Actuator
 class Battery
 
-IClient <|.. Client
-IModule <|-- IReadableModule
-IModule <|-- IWriteableModule
-IReadableModule <|.. Sensor
-IReadableModule <|.. Actuator
-IReadableModule <|.. Battery
-IWriteableModule <|.. Actuator
-IModuleFactory <|.. ModuleFactory
-IDecisionTree <|.. DecisionTree
-ISoftwareFramework <|.. SoftwareFramework
-SoftwareFramework - "0..*" IModule
-SoftwareFramework -left- "1" IModuleFactory
-SoftwareFramework -down- "1" IDecisionTree
+ModuleBase <|.. Module
+Module <|-- ReadableModule
+Module <|-- WriteableModule
+ReadableModule <|-- Sensor
+ReadableModule <|-- Actuator
+ReadableModule <|-- Battery
+WriteableModule <|-- Actuator
+ModuleFactoryBase <|.. ModuleFactory
+ComputationBase <|.. Computation
+CoreBase <|.. Core
+Core - "1..*" ModuleBase
+Core -left- "1" ModuleFactoryBase
+Core -down- "1" ComputationBase
 
-interface IClient {
-    - feedModuleData() : void
-    - sendInstructions() : void
+interface ModuleBase {
+    - arbitration_id
 }
 
-interface IModule {
-    - id : string
-    + getId() : string
+interface CoreBase {
+    + get_course_instructions()
+    + set_module_data(arbitration_id, data)
 }
 
-interface IReadableModule {
+interface ModuleFactoryBase {
+    + create_modules()
+}
+
+interface ComputationBase {
+    + compute_course_instructions()
+}
+
+class Module {
+    + __eq__()
+}
+
+class Core {
+    - modules
+    - find_module_index(arbitration_id)
+}
+
+class ReadableModule {
     - data
-    + getData()
 }
 
-interface IWriteableModule {
-    - instruction
-    + getInstruction()
-    + setInstruction()
+class WriteableModule {
+    - instructions
 }
 
-interface ISoftwareFramework {
-    - setup() : void
-    + getInstructions() : list
-    + updateModuleData(id : string, data : float) : void
-}
-
-interface IModuleFactory {
-    + createModules() : list
-}
-
-interface IDecisionTree {
-    + createInstructions()
-    - processModulesData()
-}
-
-note left of IModuleFactory::createModules
+note left of ModuleFactoryBase::create_modules
     Modules need to be defined
-    inside a settings file.
+    by their arbitation ID
+    and module type inside 
+    a settings file
 end note
 
-note right of IClient::feedModuleData 
-    Feeds active CAN bus
-    module data to 
-    SoftwareFramework
-end note
-
-note right of IClient::sendInstructions 
-    Sends instructions from
-    SoftwareFramework back
-    to CAN bus. 
+note right of Module::__eq__
+    Compares arbitration IDs
+    of both modules. This is
+    used for testing purposes.
 end note
 
 @enduml
