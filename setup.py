@@ -1,11 +1,11 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(name='Microtransat Software Framework',
-      version='0.1.1',
+      version='0.1.2',
       description='Microtransat Software Framework',
       author='Hogeschool Rotterdam',
       url='https://www.hogeschoolrotterdam.nl/',
-      packages=['poseidon'],
-      package_dir={'poseidon': 'poseidon'},
-      package_data={'poseidon': ['poseidon/settings.yaml']},
+      packages=find_packages(exclude=['.github', 'docs', 'tests']),
+      package_data={'poseidon': ['example_settings.yaml']},
+      include_package_data=True,
       install_requires=['flake8', 'ruamel.yaml'],)
