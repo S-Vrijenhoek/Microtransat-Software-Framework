@@ -7,6 +7,10 @@ from poseidon.exception.module_exception import ModuleException
 class Core(CoreBase):
 
     def __init__(self, settings_location='poseidon/settings.yaml'):
+        # logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s',
+        #                     filename='poseidon/debug.log',
+        #                     level=logging.DEBUG)
+        logging.disable()
         logging.info('Booting up the system ...')
         self._modules = ModuleFactory.create_modules(settings_location)
         logging.info('Finished booting up the system.')

@@ -67,7 +67,7 @@ note left of ModuleFactoryBase::create_modules
     Modules need to be defined
     by their arbitation ID
     and module type inside 
-    a settings file
+    a settings file.
 end note
 
 note right of Module::__eq__

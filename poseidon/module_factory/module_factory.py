@@ -20,6 +20,7 @@ def load_settings_modules(settings_location: str) -> list:
 
 class ModuleFactory(ModuleFactoryBase):
 
+    # TODO: try & catch
     @staticmethod
     def create_modules(settings_location) -> list:
         created_modules = []
