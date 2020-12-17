@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='Microtransat Software Framework',
-      version='0.1.2.1',
+      version='0.2',
       description='Microtransat Software Framework',
       author='Hogeschool Rotterdam',
       url='https://www.hogeschoolrotterdam.nl/',

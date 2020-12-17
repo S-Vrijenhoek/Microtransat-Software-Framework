@@ -5,5 +5,5 @@ class ComputationBase(ABC):
 
     # TODO: Implement algorithm
     @abstractmethod
-    def compute_course_instructions(self):
+    def compute_optimal_saling_angle(self, sailboat_rotation: float, wind_direction: float):
         pass

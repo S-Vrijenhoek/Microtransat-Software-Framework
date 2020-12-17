@@ -5,6 +5,7 @@ class Module(ModuleBase):
 
     def __init__(self, arbitration_id: str):
         self._arbitration_id = arbitration_id
+        self._data = []
 
     @property
     def arbitration_id(self) -> str:
@@ -14,3 +15,11 @@ class Module(ModuleBase):
         if not isinstance(other, Module):
             return False
         return self.arbitration_id == other.arbitration_id
+
+    @property
+    def data(self) -> list:
+        return self._data
+
+    @data.setter
+    def data(self, value: list):
+        self._data = value
