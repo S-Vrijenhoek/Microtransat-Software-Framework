@@ -1,6 +1,6 @@
 foobar: "baz"
 modules:
-  - id: "foo"
+  - id: "sailboat_rotation"
     type: "sensor"
-  - id: "bar"
+  - id: "wind_direction"
     type: "actuator"

@@ -5,7 +5,7 @@ class Module(ModuleBase):
 
     def __init__(self, arbitration_id: str):
         self._arbitration_id = arbitration_id
-        self._data = []
+        self._data = 0
 
     @property
     def arbitration_id(self) -> str:
@@ -17,7 +17,7 @@ class Module(ModuleBase):
         return self.arbitration_id == other.arbitration_id
 
     @property
-    def data(self) -> list:
+    def data(self) -> float:
         return self._data
 
     @data.setter

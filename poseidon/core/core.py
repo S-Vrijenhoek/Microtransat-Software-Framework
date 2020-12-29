@@ -20,11 +20,11 @@ class Core(CoreBase):
 
     def get_optimal_saling_angle(self) -> float:
         return self._computation.compute_optimal_saling_angle(
-            self._get_module('sailboat_rotation').data[0],
-            self._get_module('wind_direction').data[0]
+            self._get_module('sailboat_rotation').data,
+            self._get_module('wind_direction').data
         )
 
-    def set_module_data(self, arbitration_id: str, data: list) -> None:
+    def set_module_data(self, arbitration_id: str, data: float) -> None:
         target_module_index = self._find_module_index(arbitration_id)
         self._modules[target_module_index].data = data
 
