@@ -5,7 +5,7 @@ class Module(ModuleBase):
 
     def __init__(self, arbitration_id: str):
         self._arbitration_id = arbitration_id
-        self._data = 0
+        self._data = None
 
     @property
     def arbitration_id(self) -> str:
