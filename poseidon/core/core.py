@@ -24,6 +24,12 @@ class Core(CoreBase):
             self._get_module('wind_direction').data
         )
 
+    def get_optimal_rudder_angle(self) -> float:
+        return self._computation.compute_optimal_rudder_angle(
+            self._get_module('sailboat_rotation').data,
+            self._get_module('rudder_rotation').data
+        )
+
     def set_module_data(self, arbitration_id: str, data: float) -> None:
         target_module_index = self._find_module_index(arbitration_id)
         self._modules[target_module_index].data = data

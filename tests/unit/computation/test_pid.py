@@ -7,12 +7,9 @@ class TestPIDMethods(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.pid = PID()
-        self.pid.kp = 0.5
-        self.pid.ki = 0.2
-        self.pid.kd = 0.0005
 
     def test(self):
-        self.pid.control(5, 5, 2)
+        pass
 
 
 if __name__ == '__main__':
