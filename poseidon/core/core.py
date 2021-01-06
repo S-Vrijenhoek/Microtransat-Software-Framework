@@ -26,6 +26,7 @@ class Core(CoreBase):
 
     def get_optimal_rudder_angle(self) -> float:
         return self._computation.compute_optimal_rudder_angle(
+            [self._get_module('sailboat_position_x').data, self._get_module('sailboat_position_y').data],
             self._get_module('sailboat_rotation').data,
             self._get_module('rudder_rotation').data
         )
