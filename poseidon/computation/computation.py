@@ -1,35 +1,18 @@
 import time
-import math
 from poseidon.computation.computation_base import ComputationBase
 from poseidon.computation.pid import PID
+from poseidon.computation.waypoint_controller import WaypointController
 from poseidon.helper import Helper
-
-
-# WIP
-def angle_to_coordinate(coordinate_a: list, coordinate_b: list) -> float:
-    delta_x = coordinate_b[0] - coordinate_a[0]
-    delta_y = coordinate_b[1] - coordinate_a[1]
-    rad = math.atan2(delta_y, delta_x)
-    deg = rad * (180 / math.pi)
-    return deg % 360
-
-
-def distance_between_coordinates(coordinate_a: list, coordinate_b: list) -> float:
-    return math.sqrt(math.pow(coordinate_b[0] - coordinate_a[0], 2) + math.pow(coordinate_b[1] - coordinate_a[1], 2))
 
 
 class Computation(ComputationBase):
 
     def __init__(self):
         self._pid = PID()
+        self._waypoint_controller = WaypointController()
         self._delta_time = time.time()
         self._start_time = time.time()
         self._end_time = 0
-        self._waypoints = [
-            [10, 10],
-            [-10, 5]
-        ]
-        self._current_waypoint = self._waypoints[0]
 
     @property
     def delta_time(self):
@@ -66,10 +49,9 @@ class Computation(ComputationBase):
     def compute_optimal_rudder_angle(self, sailboat_position: list,
                                      sailboat_rotation: float,
                                      rudder_rotation: float) -> float:
+        if self._waypoint_controller.distance_between_waypoint(sailboat_position) < 1:
+            self._waypoint_controller.next_waypoint()
 
-        if distance_between_coordinates(sailboat_position, self._current_waypoint) < 1:
-            self._current_waypoint = self._waypoints[1]
-
-        angle_to_waypoint = angle_to_coordinate(sailboat_position, self._current_waypoint)
+        angle_to_waypoint = self._waypoint_controller.angle_to_current_waypoint(sailboat_position)
 
         return rudder_rotation - self._pid.control(angle_to_waypoint, sailboat_rotation, self.delta_time)
