@@ -48,10 +48,16 @@ class Computation(ComputationBase):
 
     def compute_optimal_rudder_angle(self, sailboat_position: list,
                                      sailboat_rotation: float,
-                                     rudder_rotation: float) -> float:
+                                     rudder_rotation: float,
+                                     wind_direction: float) -> float:
         if self._waypoint_controller.distance_between_waypoint(sailboat_position) < 1:
             self._waypoint_controller.next_waypoint()
 
         angle_to_waypoint = self._waypoint_controller.angle_to_current_waypoint(sailboat_position)
+
+        if Helper.is_between_angles(wind_direction,
+                                    (angle_to_waypoint - 45) % 360,
+                                    (angle_to_waypoint + 45) % 360):
+            angle_to_waypoint = (angle_to_waypoint + 90) % 360
 
         return rudder_rotation - self._pid.control(angle_to_waypoint, sailboat_rotation, self.delta_time)
