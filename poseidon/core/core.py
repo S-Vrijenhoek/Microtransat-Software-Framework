@@ -2,19 +2,22 @@ import logging
 from poseidon.core.core_base import CoreBase
 from poseidon.module_factory.module_factory import ModuleFactory
 from poseidon.computation.computation import Computation
-from poseidon.module.module import Module
+from poseidon.module.static_module import StaticModule
 from poseidon.exception.module_exception import ModuleException
 
 
 class Core(CoreBase):
 
     def __init__(self, settings_location='poseidon/settings.yaml'):
+        # TODO: Make use of logging
         # logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s',
         #                     filename='poseidon/debug.log',
         #                     level=logging.DEBUG)
         logging.disable()
         logging.info('Booting up the system ...')
         self._modules = ModuleFactory.create_modules(settings_location)
+        self._module_indices = dict()
+        self._register_module_indices()
         self._computation = Computation()
         logging.info('Finished booting up the system.')
 
@@ -33,19 +36,21 @@ class Core(CoreBase):
         )
 
     def set_module_data(self, arbitration_id: str, data: float) -> None:
-        target_module_index = self._find_module_index(arbitration_id)
-        self._modules[target_module_index].data = data
+        try:
+            target_module_index = self._module_indices[arbitration_id]
+            self._modules[target_module_index].data = data
+        except KeyError:
+            raise ModuleException.for_module_not_found(arbitration_id)
 
-    def _get_module(self, arbitration_id: str) -> Module:
-        target_module_index = self._find_module_index(arbitration_id)
-        return self._modules[target_module_index]
+    def _get_module(self, arbitration_id: str) -> StaticModule:
+        try:
+            target_module_index = self._module_indices[arbitration_id]
+            return self._modules[target_module_index]
+        except KeyError:
+            raise ModuleException.for_module_not_found(arbitration_id)
 
-    def _find_module_index(self, arbitration_id: str) -> int:
+    def _register_module_indices(self):
         i = 0
-
         for module in self._modules:
-            if module.arbitration_id == arbitration_id:
-                return i
+            self._module_indices[module.arbitration_id] = i
             i += 1
-
-        raise ModuleException.for_module_not_found(arbitration_id)

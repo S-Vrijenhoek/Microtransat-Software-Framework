@@ -60,4 +60,4 @@ class Computation(ComputationBase):
                                     (angle_to_waypoint + 45) % 360):
             angle_to_waypoint = (angle_to_waypoint + 90) % 360
 
-        return rudder_rotation - self._pid.control(angle_to_waypoint, sailboat_rotation, self.delta_time)
+        return (rudder_rotation - self._pid.control(angle_to_waypoint, sailboat_rotation, self.delta_time)) % 360

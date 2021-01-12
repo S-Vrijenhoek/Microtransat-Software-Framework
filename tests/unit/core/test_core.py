@@ -13,7 +13,7 @@ class TestCoreMethods(unittest.TestCase):
         self.assertRaises(ModuleException,
                           self.core.set_module_data,
                           'baz',
-                          ['bar', 'baz'])
+                          123)
 
     def test_get_optimal_saling_angle_correctly_returns_sailing_angle(self):
         self.core.set_module_data('sailboat_rotation', 180)
