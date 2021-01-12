@@ -1,16 +1,17 @@
 from poseidon.module.module import Module
 
 
-class ReadableModule(Module):
+class StaticModule(Module):
 
     def __init__(self, arbitration_id: str):
         super().__init__(arbitration_id)
-        self._data = []
+        self._data = None
 
     @property
-    def data(self) -> list:
+    def data(self) -> float:
         return self._data
 
     @data.setter
-    def data(self, value: list):
+    def data(self, value: float):
         self._data = value
+

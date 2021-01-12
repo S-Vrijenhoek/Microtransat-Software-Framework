@@ -1,8 +1,7 @@
 import logging
 import ruamel.yaml
 from poseidon.module_factory.module_factory_base import ModuleFactoryBase
-from poseidon.module.sensor import Sensor
-from poseidon.module.actuator import Actuator
+from poseidon.module.static_module import StaticModule
 from poseidon.exception.settings_exception import SettingsException
 from poseidon.exception.module_exception import ModuleException
 
@@ -34,10 +33,8 @@ class ModuleFactory(ModuleFactoryBase):
             if module_id in used_ids:
                 raise ModuleException.for_duplicate_module(module_id)
 
-            if module_type == 'sensor':
-                created_modules.append(Sensor(module_id))
-            elif module_type == 'actuator':
-                created_modules.append(Actuator(module_id))
+            if module_type == 'static_module':
+                created_modules.append(StaticModule(module_id))
             else:
                 raise ModuleException.for_missing_module(module_type)
 

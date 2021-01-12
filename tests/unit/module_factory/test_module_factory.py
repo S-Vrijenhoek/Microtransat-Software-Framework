@@ -1,7 +1,6 @@
 import unittest
 from poseidon.module_factory.module_factory import load_settings_modules, ModuleFactory
-from poseidon.module.sensor import Sensor
-from poseidon.module.actuator import Actuator
+from poseidon.module.static_module import StaticModule
 from poseidon.exception.settings_exception import SettingsException
 from poseidon.exception.module_exception import ModuleException
 
@@ -10,8 +9,8 @@ class TestModuleFactoryMethods(unittest.TestCase):
 
     def test_load_settings_modules_correctly_loads_modules(self):
         expected_result = [
-            {'id': '1', 'type': 'sensor'},
-            {'id': '2', 'type': 'actuator'}
+            {'id': '1', 'type': 'static_module'},
+            {'id': '2', 'type': 'static_module'}
         ]
 
         result = load_settings_modules('tests/unit/module_factory/test_settings.yaml')
@@ -24,8 +23,8 @@ class TestModuleFactoryMethods(unittest.TestCase):
 
     def test_create_modules_correctly_creates_modules(self):
         expected_result = [
-            Sensor('1'),
-            Actuator('2')
+            StaticModule('1'),
+            StaticModule('2')
         ]
 
         result = ModuleFactory.create_modules('tests/unit/module_factory/test_settings.yaml')

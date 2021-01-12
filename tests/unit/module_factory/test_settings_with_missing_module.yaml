@@ -1,8 +1,8 @@
 foobar: "baz"
 modules:
   - id: "1"
-    type: "sensor"
+    type: "static_module"
   - id: "2"
-    type: "actuator"
+    type: "static_module"
   - id: "3"
     type: "foo"
