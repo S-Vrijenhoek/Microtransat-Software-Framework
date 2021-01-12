@@ -4,3 +4,6 @@ modules:
     type: "static_module"
   - id: "wind_direction"
     type: "static_module"
+waypoints:
+  - x: 0.123
+    y: 123

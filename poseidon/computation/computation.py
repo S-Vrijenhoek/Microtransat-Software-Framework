@@ -1,15 +1,15 @@
 import time
 from poseidon.computation.computation_base import ComputationBase
 from poseidon.computation.pid import PID
-from poseidon.computation.waypoint_controller import WaypointController
+from poseidon.waypoint.waypoint_controller import WaypointController
 from poseidon.helper import Helper
 
 
 class Computation(ComputationBase):
 
-    def __init__(self):
+    def __init__(self, waypoints: list):
         self._pid = PID()
-        self._waypoint_controller = WaypointController()
+        self._waypoint_controller = WaypointController(waypoints)
         self._delta_time = time.time()
         self._start_time = time.time()
         self._end_time = 0

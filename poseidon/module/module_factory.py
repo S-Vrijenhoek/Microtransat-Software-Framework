@@ -1,6 +1,6 @@
 import logging
 import ruamel.yaml
-from poseidon.module_factory.module_factory_base import ModuleFactoryBase
+from poseidon.module.module_factory_base import ModuleFactoryBase
 from poseidon.module.static_module import StaticModule
 from poseidon.exception.settings_exception import SettingsException
 from poseidon.exception.module_exception import ModuleException

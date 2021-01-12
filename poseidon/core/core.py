@@ -1,6 +1,7 @@
 import logging
 from poseidon.core.core_base import CoreBase
-from poseidon.module_factory.module_factory import ModuleFactory
+from poseidon.waypoint.waypoint_factory import WaypointFactory
+from poseidon.module.module_factory import ModuleFactory
 from poseidon.computation.computation import Computation
 from poseidon.module.static_module import StaticModule
 from poseidon.exception.module_exception import ModuleException
@@ -18,7 +19,7 @@ class Core(CoreBase):
         self._modules = ModuleFactory.create_modules(settings_location)
         self._module_indices = dict()
         self._register_module_indices()
-        self._computation = Computation()
+        self._computation = Computation(WaypointFactory.create_waypoints(settings_location))
         logging.info('Finished booting up the system.')
 
     def get_optimal_saling_angle(self) -> float:

@@ -7,4 +7,8 @@ class SettingsException(Exception):
 
     @staticmethod
     def for_missing_modules():
-        return SettingsException("The settings file is missing it's modules.")
+        return SettingsException("The settings file is missing its modules.")
+
+    @staticmethod
+    def for_missing_waypoints():
+        return SettingsException("The settings file is missing its waypoints.")

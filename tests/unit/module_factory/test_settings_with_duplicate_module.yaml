@@ -6,3 +6,6 @@ modules:
     type: "static_module"
   - id: "2"
     type: "static_module"
+waypoints:
+  - x: 0.123
+    y: 123

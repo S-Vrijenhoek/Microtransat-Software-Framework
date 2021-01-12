@@ -1,5 +1,5 @@
 import unittest
-from poseidon.module_factory.module_factory import load_settings_modules, ModuleFactory
+from poseidon.module.module_factory import load_settings_modules, ModuleFactory
 from poseidon.module.static_module import StaticModule
 from poseidon.exception.settings_exception import SettingsException
 from poseidon.exception.module_exception import ModuleException

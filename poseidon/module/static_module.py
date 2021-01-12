@@ -14,4 +14,3 @@ class StaticModule(Module):
     @data.setter
     def data(self, value: float):
         self._data = value
-

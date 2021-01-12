@@ -1,13 +1,10 @@
 import math
-from poseidon.computation.waypoint import Waypoint
+from poseidon.waypoint.waypoint import Waypoint
 
 
 class WaypointController:
-    def __init__(self):
-        self._waypoints = [
-            Waypoint(10, 10),
-            Waypoint(-10, 5)
-        ]
+    def __init__(self, waypoints: list):
+        self._waypoints = waypoints
         self._index = 0
         self._current_waypoint = self._waypoints[0]
 
