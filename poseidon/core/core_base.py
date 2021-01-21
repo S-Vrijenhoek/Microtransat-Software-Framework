@@ -8,5 +8,9 @@ class CoreBase(ABC):
         pass
 
     @abstractmethod
+    def get_optimal_rudder_angle(self) -> float:
+        pass
+
+    @abstractmethod
     def set_module_data(self, arbitration_id: str, data: float):
         pass

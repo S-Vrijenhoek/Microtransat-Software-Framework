@@ -22,9 +22,11 @@ class Computation(ComputationBase):
 
         return self._delta_time
 
-    def compute_optimal_saling_angle(self, sailboat_rotation: float, wind_direction: float) -> float:
+    def compute_optimal_sailing_angle(self, sailboat_rotation: float, wind_direction: float) -> float:
         # If wind is coming straight from behind
-        if Helper.is_between_angles((sailboat_rotation + 180) % 360, (wind_direction - 45) % 360, (wind_direction + 45) % 360):
+        if Helper.is_between_angles((sailboat_rotation + 180) % 360,
+                                    (wind_direction - 45) % 360,
+                                    (wind_direction + 45) % 360):
             return Helper.distance_between_angles((sailboat_rotation + 90) % 360, wind_direction)
         else:
             distance = Helper.distance_between_angles((sailboat_rotation + 180) % 360, wind_direction)
@@ -44,7 +46,7 @@ class Computation(ComputationBase):
                                      sailboat_rotation: float,
                                      rudder_rotation: float,
                                      wind_direction: float) -> float:
-        if self._waypoint_controller.distance_between_waypoint(sailboat_position) < 1:
+        if self._waypoint_controller.distance_to_waypoint(sailboat_position) < 1:
             self._waypoint_controller.next_waypoint()
 
         angle_to_waypoint = self._waypoint_controller.angle_to_current_waypoint(sailboat_position)

@@ -3,7 +3,13 @@ from abc import ABC, abstractmethod
 
 class ComputationBase(ABC):
 
-    # TODO: Implement algorithm
     @abstractmethod
-    def compute_optimal_saling_angle(self, sailboat_rotation: float, wind_direction: float):
+    def compute_optimal_sailing_angle(self, sailboat_rotation: float, wind_direction: float) -> float:
+        pass
+
+    @abstractmethod
+    def compute_optimal_rudder_angle(self, sailboat_position: list,
+                                     sailboat_rotation: float,
+                                     rudder_rotation: float,
+                                     wind_direction: float) -> float:
         pass

@@ -18,7 +18,7 @@ def clamp_error(error: float, clamp: float) -> float:
         return clamp
 
 
-# TODO: Fine tune PID
+# TODO: Fine tune PID and redefine method privacy
 class PID:
     def __init__(self):
         self.error_integral = 0

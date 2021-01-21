@@ -1,7 +1,7 @@
-from poseidon.module.module import Module
+from poseidon.module.module_base import ModuleBase
 
 
-class StaticModule(Module):
+class StaticModule(ModuleBase):
 
     def __init__(self, arbitration_id: str):
         super().__init__(arbitration_id)

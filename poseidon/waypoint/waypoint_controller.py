@@ -19,7 +19,7 @@ class WaypointController:
             self._index = 0
         self._current_waypoint = self._waypoints[self._index]
 
-    # WIP
+    # TODO: Check if better implementation is possible
     def angle_to_current_waypoint(self, sailboat_coordinates: list) -> float:
         delta_x = self.current_waypoint.coordinate_x - sailboat_coordinates[0]
         delta_y = self.current_waypoint.coordinate_y - sailboat_coordinates[1]
@@ -27,7 +27,7 @@ class WaypointController:
         deg = rad * (180 / math.pi)
         return deg % 360
 
-    def distance_between_waypoint(self, sailboat_coordinates: list) -> float:
+    def distance_to_waypoint(self, sailboat_coordinates: list) -> float:
         return math.sqrt(
             math.pow(self.current_waypoint.coordinate_x - sailboat_coordinates[0], 2) +
             math.pow(self.current_waypoint.coordinate_y - sailboat_coordinates[1], 2))

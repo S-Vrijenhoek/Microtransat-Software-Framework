@@ -5,36 +5,35 @@ interface ModuleFactoryBase
 interface ComputationBase
 interface CoreBase
 
-class ReadableModule
-class WriteableModule
-class Module
+class StaticModule
 class ModuleFactory
 class Computation
 class Core
-class Sensor
-class Actuator
-class Battery
+class PID
+class WaypointController
+class Waypoint
+class WaypointFactory
 
-ModuleBase <|.. Module
-Module <|-- ReadableModule
-Module <|-- WriteableModule
-ReadableModule <|-- Sensor
-ReadableModule <|-- Actuator
-ReadableModule <|-- Battery
-WriteableModule <|-- Actuator
+ModuleBase <|.. StaticModule
 ModuleFactoryBase <|.. ModuleFactory
 ComputationBase <|.. Computation
 CoreBase <|.. Core
 Core - "1..*" ModuleBase
 Core -left- "1" ModuleFactoryBase
+Core -left- "1" WaypointFactory
 Core -down- "1" ComputationBase
+Computation - "1" PID
+Computation -left- "1" WaypointController
+WaypointController -left- "*..1" Waypoint
 
 interface ModuleBase {
     - arbitration_id
+    + __eq__(other)
 }
 
 interface CoreBase {
-    + get_course_instructions()
+    + get_optimal_saling_angle()
+    + get_optimal_rudder_angle()
     + set_module_data(arbitration_id, data)
 }
 
@@ -43,24 +42,54 @@ interface ModuleFactoryBase {
 }
 
 interface ComputationBase {
-    + compute_course_instructions()
+    + compute_optimal_sailing_angle(sailboat_rotation, wind_direction)
+    + compute_optimal_rudder_angle(sailboat_position, sailboat_rotation, rudder_rotation, wind_direction)
 }
 
-class Module {
-    + __eq__()
+class PID {
+    + error_intregral
+    + kp
+    + ki
+    + kd
+    + calculate_proportional(error)
+    + calculate_intergrational(dt, error)
+    + calculate_differentional(current_input, dt, error)
+}
+
+class WaypointController {
+    + current_waypoint
+    - waypoints
+    - index
+    + next_waypoint()
+    + angle_to_current_waypoint(sailboat_coordinates)
+    + distance_to_waypoint(sailboat_coordinates)
+}
+
+class WaypointFactory {
+    + create_waypoints()
+}
+
+class Waypoint {
+    + coordinate_x
+    + coordinate_y
+}
+
+class StaticModule {
+    + data
+}
+
+class Computation {
+    + delta_time
+    - pid
+    - waypoint_controller
 }
 
 class Core {
     - modules
-    - find_module_index(arbitration_id)
-}
-
-class ReadableModule {
-    - data
-}
-
-class WriteableModule {
-    - instructions
+    - computation
+    - module_indices
+    - get_module(arbitration_id)
+    - register_module_indices()
 }
 
 note left of ModuleFactoryBase::create_modules
@@ -70,10 +99,17 @@ note left of ModuleFactoryBase::create_modules
     a settings file.
 end note
 
-note right of Module::__eq__
+note right of ModuleBase::__eq__
     Compares arbitration IDs
     of both modules. This is
     used for testing purposes.
+end note
+
+note left of WaypointFactory::create_waypoints
+    Waypoints needs to be
+    defined inside a settings
+    file by their x and y 
+    coordinates.
 end note
 
 @enduml

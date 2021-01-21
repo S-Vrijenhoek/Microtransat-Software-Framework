@@ -23,7 +23,7 @@ class Core(CoreBase):
         logging.info('Finished booting up the system.')
 
     def get_optimal_saling_angle(self) -> float:
-        return self._computation.compute_optimal_saling_angle(
+        return self._computation.compute_optimal_sailing_angle(
             self._get_module('sailboat_rotation').data,
             self._get_module('wind_direction').data
         )
@@ -43,6 +43,7 @@ class Core(CoreBase):
         except KeyError:
             raise ModuleException.for_module_not_found(arbitration_id)
 
+    # TODO: Make this work for every module type (don't always return a StaticModule)
     def _get_module(self, arbitration_id: str) -> StaticModule:
         try:
             target_module_index = self._module_indices[arbitration_id]
