@@ -1,6 +1,23 @@
-# EXAMPLE SETTINGS
-#modules:
-#  - id: "x04"
-#    type: "sensor"
-#  - id: "x05"
-#    type: "actuator"
+# Example settings
+modules:
+  - id: "sailboat_rotation"
+    type: "static_module"
+  - id: "wind_direction"
+    type: "static_module"
+  - id: "rudder_rotation"
+    type: "static_module"
+  - id: "sailboat_position_x"
+    type: "static_module"
+  - id: "sailboat_position_y"
+    type: "static_module"
+waypoints:
+  - x: 1
+    y: 5
+  - x: 5
+    y: 6
+  - x: 10
+    y: 6
+  - x: 10
+    y: 0
+  - x: 5
+    y: 0
