@@ -22,7 +22,7 @@ class Core(CoreBase):
         self._computation = Computation(WaypointFactory.create_waypoints(settings_location))
         logging.info('Finished booting up the system.')
 
-    def get_optimal_saling_angle(self) -> float:
+    def get_optimal_sailing_angle(self) -> float:
         return self._computation.compute_optimal_sailing_angle(
             self._get_module('sailboat_rotation').data,
             self._get_module('wind_direction').data

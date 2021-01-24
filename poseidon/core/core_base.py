@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class CoreBase(ABC):
 
     @abstractmethod
-    def get_optimal_saling_angle(self) -> float:
+    def get_optimal_sailing_angle(self) -> float:
         pass
 
     @abstractmethod

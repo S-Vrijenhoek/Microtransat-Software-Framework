@@ -18,7 +18,7 @@ class TestCoreMethods(unittest.TestCase):
     def test_get_optimal_saling_angle_correctly_returns_sailing_angle(self):
         self.core.set_module_data('sailboat_rotation', 180)
         self.core.set_module_data('wind_direction', 90)
-        self.core.get_optimal_saling_angle()
+        self.core.get_optimal_sailing_angle()
 
 
 if __name__ == '__main__':
