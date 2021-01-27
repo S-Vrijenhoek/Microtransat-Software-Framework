@@ -34,9 +34,9 @@ pip install -r requirements.txt
 - [ ] Implement better error handling
 - [ ] Make use of logging
 - [ ] Implement interactive modules (the current static module implementation is purely for feeding data to the software framework, i.e. sensors and actuators). These are modules which make it possible for different types of modules to communicate with each other. For example, an API between the software framework and the ISBD module.
-- [ ] Write more in-depth algoritmhs for tacking and gybing
+- [ ] Write more in-depth algorithms for tacking and gybing
 - [ ] Take weather into account when calculating an optimal route
-- [ ] Take objects into account when calculating an optimal route
+- [ ] Take objects (i.e. ships, icebergs) into account when calculating an optimal route
 
 ### Contributing
 Make sure to pull the latest changes and to follow the steps specified below before contributing. 
