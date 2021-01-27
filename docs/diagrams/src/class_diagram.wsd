@@ -2,6 +2,7 @@
 
 interface ModuleBase
 interface ModuleFactoryBase
+interface WaypointFactoryBase
 interface ComputationBase
 interface CoreBase
 
@@ -17,14 +18,15 @@ class WaypointFactory
 ModuleBase <|.. StaticModule
 ModuleFactoryBase <|.. ModuleFactory
 ComputationBase <|.. Computation
+WaypointFactoryBase <|-- WaypointFactory
 CoreBase <|.. Core
-Core - "1..*" ModuleBase
-Core -left- "1" ModuleFactoryBase
-Core -left- "1" WaypointFactory
-Core -down- "1" ComputationBase
-Computation - "1" PID
-Computation -left- "1" WaypointController
-WaypointController -left- "*..1" Waypoint
+Core "1" - "1..*" ModuleBase
+Core o-left- ModuleFactoryBase
+Core o-left- WaypointFactoryBase
+Core o-down- ComputationBase
+Computation o-right- PID
+Computation o-left- WaypointController
+WaypointController "1" -down- "1..*" Waypoint
 
 interface ModuleBase {
     - arbitration_id
@@ -46,6 +48,10 @@ interface ComputationBase {
     + compute_optimal_rudder_angle(sailboat_position, sailboat_rotation, rudder_rotation, wind_direction)
 }
 
+interface WaypointFactoryBase {
+    + create_waypoints()
+}
+
 class PID {
     + error_intregral
     + kp
@@ -58,15 +64,9 @@ class PID {
 
 class WaypointController {
     + current_waypoint
-    - waypoints
-    - index
     + next_waypoint()
     + angle_to_current_waypoint(sailboat_coordinates)
     + distance_to_waypoint(sailboat_coordinates)
-}
-
-class WaypointFactory {
-    + create_waypoints()
 }
 
 class Waypoint {
@@ -80,13 +80,9 @@ class StaticModule {
 
 class Computation {
     + delta_time
-    - pid
-    - waypoint_controller
 }
 
 class Core {
-    - modules
-    - computation
     - module_indices
     - get_module(arbitration_id)
     - register_module_indices()
@@ -103,13 +99,6 @@ note right of ModuleBase::__eq__
     Compares arbitration IDs
     of both modules. This is
     used for testing purposes.
-end note
-
-note left of WaypointFactory::create_waypoints
-    Waypoints needs to be
-    defined inside a settings
-    file by their x and y 
-    coordinates.
 end note
 
 @enduml

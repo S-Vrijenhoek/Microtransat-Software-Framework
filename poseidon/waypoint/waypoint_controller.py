@@ -5,19 +5,17 @@ from poseidon.waypoint.waypoint import Waypoint
 class WaypointController:
     def __init__(self, waypoints: list):
         self._waypoints = waypoints
-        self._index = 0
-        self._current_waypoint = self._waypoints[0]
+        self._current_waypoint = 0
 
     @property
     def current_waypoint(self) -> Waypoint:
-        return self._current_waypoint
+        return self._waypoints[self._current_waypoint]
 
     def next_waypoint(self) -> None:
-        if (self._index + 1) < len(self._waypoints):
-            self._index += 1
+        if (self._current_waypoint + 1) < len(self._waypoints):
+            self._current_waypoint += 1
         else:
-            self._index = 0
-        self._current_waypoint = self._waypoints[self._index]
+            self._current_waypoint = 0
 
     # TODO: Check if better implementation is possible
     def angle_to_current_waypoint(self, sailboat_coordinates: list) -> float:

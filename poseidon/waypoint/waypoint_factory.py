@@ -1,5 +1,6 @@
 import logging
 import ruamel.yaml
+from poseidon.waypoint.waypoint_factory_base import WaypointFactoryBase
 from poseidon.waypoint.waypoint import Waypoint
 from poseidon.exception.settings_exception import SettingsException
 
@@ -15,11 +16,11 @@ def load_settings_waypoints(settings_location: str) -> list:
             raise SettingsException.for_missing_waypoints()
 
 
-class WaypointFactory:
+class WaypointFactory(WaypointFactoryBase):
 
     # TODO: try & catch
     @staticmethod
-    def create_waypoints(settings_location) -> list:
+    def create_waypoints(settings_location: str) -> list:
         created_waypoints = []
 
         logging.info('Loading all waypoints ...')
