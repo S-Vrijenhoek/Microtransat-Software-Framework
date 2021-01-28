@@ -18,14 +18,14 @@ class WaypointFactory
 ModuleBase <|.. StaticModule
 ModuleFactoryBase <|.. ModuleFactory
 ComputationBase <|.. Computation
-WaypointFactoryBase <|-- WaypointFactory
+WaypointFactoryBase <|.. WaypointFactory
 CoreBase <|.. Core
 Core "1" - "1..*" ModuleBase
-Core o-left- ModuleFactoryBase
-Core o-left- WaypointFactoryBase
-Core o-down- ComputationBase
+Core *-left- ModuleFactoryBase
+Core *-left- WaypointFactoryBase
+Core *-down- ComputationBase
 Computation o-right- PID
-Computation o-left- WaypointController
+Computation *-left- WaypointController
 WaypointController "1" -down- "1..*" Waypoint
 
 interface ModuleBase {
